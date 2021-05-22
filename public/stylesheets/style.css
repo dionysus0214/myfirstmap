@@ -1,5 +1,6 @@
 body {
   padding: 0px !important;
+  /* !important: 다른 css 적용을 무시하고 해당 css를 강제로 적용하겠다는 의미 */
   margin: 0px !important;
 }
 
@@ -11,13 +12,16 @@ body {
   font-weight: bolder;
   font-size: 25px;
   display: flex;
+  /* display: 가운데 정렬, 수직 정렬 */
   justify-content: center;
+  align-items: center;
 }
 
 #infoBox {
   position: absolute;
   top: 100px;
   z-index: 10000;
+  /* z-index: 컴포넌트의 순서를 정하는 요소 */
   background: white;
   left: 20px;
   padding: 15px;
@@ -33,7 +37,7 @@ body {
 
 .marker {
   border: 1px solid black;
-  background:green;
+  background: green;
   opacity: 0.8;
   width: 24px;
   height: 24px;
@@ -52,8 +56,8 @@ body {
 }
 
 .infowindow_content {
- font-size: 13px;
- font-weight: normal; 
+  font-size: 13px;
+  font-weight: normal;
 }
 
 .infowindow_date {
