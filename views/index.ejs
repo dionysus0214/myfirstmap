@@ -26,14 +26,17 @@
     <script type="text/javascript" src="/data/data.js"></script>
     <script>
     let mapOptions = {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 10
+        center: new naver.maps.LatLng(37.564214, 127.001699),
+        zoom: 12
     };
 
     let map = new naver.maps.Map('map', mapOptions);
 
     let today = new Date();
-    
+    let currentDate = today.getFullYear() + "." + (today.getMonth() + 1) + "." + today.getDate() + ".";
+    let result = document.getElementById("infoContent"); 
+    result.innerHTML = currentDate;
+
     let markerList = [];
     let infowindowList = [];
 
