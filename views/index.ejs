@@ -94,11 +94,11 @@
       }
     }
 
-    let currentUse = true;
+    let currentUse = true; // true일 때만 marker 1회 생성
 
     $("#current").click(() => {
-      if('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position){
+      if('geolocation' in navigator) { // geolocation API: 사용자의 현재 위치 정보를 가져올 때 사용하는 JS API
+        navigator.geolocation.getCurrentPosition(function(position) {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
           const latlng = new naver.maps.LatLng(lat, lng);

@@ -71,7 +71,7 @@ body {
   z-index: 10000;
   background: white;
   left: 20px;
-  padding: 15px;
+  padding: 16px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   text-align: center;
@@ -110,9 +110,11 @@ body {
 }
 
 @keyframes pulse {
+  /* keyframes: 시간대별로 애니메이션이 어떻게 작용할지를 미리 명시 */
   0% {
     box-shadow: 0 0 0 0 rgba(204, 49, 44, 0.4);
     -moz-box-shadow: 0 0 0 0 rgba(204, 49, 44, 0.4);
+    /* -moz: 파이어폭스에 적용 */
   }
   70% {
     box-shadow: 0 0 0 20px rgba(204, 49, 44, 0.4);
@@ -125,6 +127,7 @@ body {
 }
 
 @-webkit-keyframes pulse {
+  /* -webkit: 크롬에 적용 */
   0% {
     box-shadow: 0 0 0 0 rgba(204, 49, 44, 0.4);
     -moz-box-shadow: 0 0 0 0 rgba(204, 49, 44, 0.4);
