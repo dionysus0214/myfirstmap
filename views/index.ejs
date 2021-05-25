@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>going TODAY</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <!-- 네이버 지도를 띄울 수 있는 key -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=e6h3qbzmz4"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d29d7ed5d29836757df06e0789cba3db&libraries=services"></script>
+    <!-- RESt API 키일 때 검색 안되서 JavaScript 키로 변경 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30fe85ed28570a02950c7b4060789af6&libraries=services"></script>
   </head>
   <body>
     <div id="navbar">going TODAY</div>
@@ -71,7 +71,7 @@
     }
 
     for(let i = 0, ii = markerList.length; i < ii; i++) {
-      naver.maps.Event.addListener(map, "click", ClickMap(i));
+      naver.maps.Event.addListener(map, "click", ClickMap(i)); // marker가 아닌 지도를 클릭해도 infowindow 사라지도록
       naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
     }
 
@@ -86,9 +86,9 @@
       return function() {
         let marker = markerList[i];
         let infowindow = infowindowList[i];
-        if(infowindow.getMap()) {
+        if(infowindow.getMap()) { // infowindow가 지도에 표시되어 있으면 닫고(true, false로 반환)
           infowindow.close();
-        } else {
+        } else { // 표시되어 있지 않으면 infowindow를 띄움
           infowindow.open(map, marker);
         }
       }
@@ -117,15 +117,15 @@
           map.panTo(latlng);
         });
       } else {
-        alert('위치 정보 사용 불가능');
+        alert('위치 정보가 없습니다.');
       }
     });
 
     let ps = new kakao.maps.services.Places();
     let search_arr = [];
 
-    $("#search_input").on("keydown", function(e) {
-      if(e.keyCode === 13) {
+    $("#search_input").on("keydown", function(e) { // keydown: 엔터키 누를 때의 키보드 이벤트
+      if(e.keyCode === 13) { // 13은 엔터키
         let content = $(this).val();
         ps.keywordSearch(content, placeSearchCB);
       }
@@ -137,8 +137,12 @@
     })
 
     function placeSearchCB(data, status, pagination) {
+      // data: 목적지를 바탕으로 검색한 결과
+      // status: 서버에 대한 상태를 status를 통해 받아옴
+      // pagination : 검색 결과가 얼마나 있는지 번호를 통해 확인(사용 X)
       if(status === kakao.maps.services.Status.OK) {
         let target = data[0];
+        // console.log(target);
         const lat = target.y;
         const lng = target.x;
         const latlng = new naver.maps.LatLng(lat, lng);
@@ -146,7 +150,7 @@
           position: latlng,
           map: map
         })
-        if(search_arr.length == 0) {
+        if(search_arr.length == 0) { // 검색 시 과거 검색 marker는 사라지고 새로운 marker로 변경
           search_arr.push(marker);
         } else {
           search_arr.push(marker);
